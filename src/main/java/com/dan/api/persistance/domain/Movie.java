@@ -1,10 +1,13 @@
 package com.dan.api.persistance.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Movie {
@@ -24,7 +27,8 @@ public class Movie {
 	@Column(name = "img_url")
 	private String imgUrl;
 
-//	private Set<Review> reviews;
+	@OneToMany(mappedBy = "movie")
+	private List<Review> reviews;
 
 	public long getId() {
 		return id;
@@ -64,5 +68,13 @@ public class Movie {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 }

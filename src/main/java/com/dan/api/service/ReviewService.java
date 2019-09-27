@@ -42,7 +42,12 @@ public class ReviewService {
 	
 	public Review updateReview(long reviewId, Review newReview) throws ReviewNotFoundException {
 		Review oldReview = getReview(reviewId);
-		//if(newReview.getEmail() != null) oldReview.setEmail(newReview.getEmail());
+
+		if(newReview.getTitle() != null) oldReview.setTitle(newReview.getTitle());
+		if(newReview.getContent() != null) oldReview.setContent(newReview.getContent());
+		//TODO: change likes to Long wrapper to check for null?
+		oldReview.setLikes(newReview.getLikes());
+
 		repo.save(oldReview);
 		return oldReview;
 	}

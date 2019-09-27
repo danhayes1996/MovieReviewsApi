@@ -21,7 +21,8 @@ public class Review {
 	
 	private long likes;
 	
-	//private Movie movie;
+	@ManyToOne
+	private Movie movie;
 	
 	@ManyToOne
 	private User user;
@@ -58,13 +59,13 @@ public class Review {
 		this.likes = likes;
 	}
 
-//	public Movie getMovie() {
-//		return movie;
-//	}
-//
-//	public void setMovie(Movie movie) {
-//		this.movie = movie;
-//	}
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
 
 	public User getUser() {
 		return user;
