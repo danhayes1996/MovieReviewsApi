@@ -11,7 +11,7 @@ public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long movieId;
+	private long id;
 	
 	private String name;
 	
@@ -26,12 +26,12 @@ public class Movie {
 
 //	private Set<Review> reviews;
 
-	public long getMovieId() {
-		return movieId;
+	public long getId() {
+		return id;
 	}
 
-	public void setMovieId(long movieId) {
-		this.movieId = movieId;
+	public void setId(long movieId) {
+		this.id = movieId;
 	}
 
 	public String getName() {

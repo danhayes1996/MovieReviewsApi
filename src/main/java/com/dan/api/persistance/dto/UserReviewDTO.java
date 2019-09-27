@@ -11,11 +11,11 @@ public class UserReviewDTO {
 	private long userId;
 	
 	public UserReviewDTO(Review review) {
-		this.reviewId = review.getReviewId();
+		this.reviewId = review.getId();
 		this.title = review.getTitle();
 		this.content = review.getContent();
 		this.likes = review.getLikes();
-		this.userId = review.getUser().getUserId();
+		this.userId = review.getUser().getId();
 	}
 	
 	public long getReviewId() {

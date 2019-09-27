@@ -9,15 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
+	private long id;
 	
 	private String email;
 	
@@ -29,16 +26,15 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	
-//	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 	
-	public long getUserId() {
-		return userId;
+	public long getId() {
+		return id;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setId(long userId) {
+		this.id = userId;
 	}
 
 	public String getEmail() {

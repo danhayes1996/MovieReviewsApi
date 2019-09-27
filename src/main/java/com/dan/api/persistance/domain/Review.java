@@ -7,15 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long reviewId;
+	private long id;
 	
 	private String title;
 	
@@ -26,16 +23,15 @@ public class Review {
 	
 	//private Movie movie;
 	
-//	@JsonBackReference
 	@ManyToOne
 	private User user;
 
-	public long getReviewId() {
-		return reviewId;
+	public long getId() {
+		return id;
 	}
 
-	public void setReviewId(long reviewId) {
-		this.reviewId = reviewId;
+	public void setId(long reviewId) {
+		this.id = reviewId;
 	}
 
 	public String getTitle() {

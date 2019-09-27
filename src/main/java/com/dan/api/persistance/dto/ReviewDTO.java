@@ -10,7 +10,7 @@ public class ReviewDTO {
 	private long likes;
 	
 	public ReviewDTO(Review review) {
-		this.reviewId = review.getReviewId();
+		this.reviewId = review.getId();
 		this.title = review.getTitle();
 		this.content = review.getContent();
 		this.likes = review.getLikes();
