@@ -15,6 +15,7 @@ import com.dan.api.service.MovieService;
 
 @RestController
 @RequestMapping("movie")
+//CANT USE MovieReviewsDTO because infinite loop
 public class MovieController {
 	
 	private MovieService service;

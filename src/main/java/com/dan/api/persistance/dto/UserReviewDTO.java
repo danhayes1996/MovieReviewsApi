@@ -9,6 +9,7 @@ public class UserReviewDTO {
 	private String content;
 	private long likes;
 	private long userId;
+	private MovieDTO movie;
 	
 	public UserReviewDTO(Review review) {
 		this.reviewId = review.getId();
@@ -16,6 +17,7 @@ public class UserReviewDTO {
 		this.content = review.getContent();
 		this.likes = review.getLikes();
 		this.userId = review.getUser().getId();
+		this.movie = new MovieDTO(review.getMovie());
 	}
 	
 	public long getReviewId() {
@@ -56,5 +58,13 @@ public class UserReviewDTO {
 	
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	
+	public MovieDTO getMovie() {
+		return movie;
+	}
+
+	public void setMovie(MovieDTO movie) {
+		this.movie = movie;
 	}
 }
