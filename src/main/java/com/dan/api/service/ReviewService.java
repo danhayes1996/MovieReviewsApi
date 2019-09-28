@@ -24,12 +24,12 @@ public class ReviewService {
 		return repo.findAll();
 	}
 
-	public Review getReview(long ReviewId) throws ReviewNotFoundException {
-		Optional<Review> result = repo.findById(ReviewId);
+	public Review getReview(long reviewId) throws ReviewNotFoundException {
+		Optional<Review> result = repo.findById(reviewId);
 		if(result.isPresent()) {
 			return result.get();
 		}
-		throw new ReviewNotFoundException(ReviewId);
+		throw new ReviewNotFoundException(reviewId);
 	}
 	
 	public String createReview(Review review, Movie movie, User user) {

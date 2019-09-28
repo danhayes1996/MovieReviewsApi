@@ -2,6 +2,7 @@ package com.dan.api.persistance.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Movie {
 	@Column(name = "img_url")
 	private String imgUrl;
 
-	@OneToMany(mappedBy = "movie")
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews;
 
 	public long getId() {
