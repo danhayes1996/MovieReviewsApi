@@ -23,6 +23,10 @@ public class User {
 	private String email;
 	
 	@NotNull
+	@Column(columnDefinition = "VARCHAR(32)", unique = true)
+	private String username;
+	
+	@NotNull
 	@Column(columnDefinition = "VARCHAR(32)")
 	private String password;
 	
@@ -51,6 +55,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

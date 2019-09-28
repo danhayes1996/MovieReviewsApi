@@ -32,8 +32,16 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public MovieReviewsDTO getMovie(@PathVariable("id") long movieId) {
-		return new MovieReviewsDTO(service.getMovie(movieId));
+	public MovieReviewsDTO getMovieById(@PathVariable("id") long movieId) {
+		return new MovieReviewsDTO(service.getMovieById(movieId));
+	}
+	
+	@RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
+	public List<MovieReviewsDTO> getMovies(@PathVariable("name") String name) { 
+		return service.getMovies(name)
+					.stream()
+					.map(movie -> new MovieReviewsDTO(movie))
+					.collect(Collectors.toList());
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

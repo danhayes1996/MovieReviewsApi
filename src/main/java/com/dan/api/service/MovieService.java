@@ -22,12 +22,16 @@ public class MovieService {
 		return repo.findAll();
 	}
 	
-	public Movie getMovie(long MovieId) throws MovieNotFoundException {
+	public Movie getMovieById(long MovieId) throws MovieNotFoundException {
 		Optional<Movie> result = repo.findById(MovieId);
 		if(result.isPresent()) {
 			return result.get();
 		}
 		throw new MovieNotFoundException(MovieId);
+	}
+	
+	public List<Movie> getMovies(String name) {
+		return repo.findByNameContaining(name);
 	}
 	
 	public String createMovie(Movie movie) {
@@ -39,7 +43,7 @@ public class MovieService {
 	}
 	
 	public Movie updateMovie(long movieId, Movie newMovie) throws MovieNotFoundException {
-		Movie oldMovie = getMovie(movieId);
+		Movie oldMovie = getMovieById(movieId);
 		
 		if(newMovie.getName() != null) oldMovie.setName(newMovie.getName());
 		if(newMovie.getDescription() != null) oldMovie.setDescription(newMovie.getDescription());
@@ -51,7 +55,7 @@ public class MovieService {
 	}
 	
 	public Movie deleteMovie(long movieId) throws MovieNotFoundException {
-		Movie movie = getMovie(movieId);
+		Movie movie = getMovieById(movieId);
 		repo.delete(movie);
 		return movie;
 	}

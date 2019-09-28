@@ -3,8 +3,11 @@ package com.dan.api.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.dan.api.exception.DuplicateEmailException;
+import com.dan.api.exception.DuplicateUsernameException;
 import com.dan.api.exception.UserNotFoundException;
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.repository.UserRepository;
@@ -31,14 +34,26 @@ public class UserService {
 	}
 	
 	public String createUser(User user) {
-		User result = repo.save(user);
-		if(result != null) {
-			return "{\"message\":\"User Successfully Created.\"}";
+		try {
+			repo.save(user);
+		} catch (DataIntegrityViolationException dive) {
+			if(repo.existsByEmail(user.getEmail())) {
+				throw new DuplicateEmailException(user.getEmail());
+			} else if (repo.existsByUsername(user.getUsername())) {
+				throw new DuplicateUsernameException(user.getUsername());
+			}
 		}
-		return "{\"error\":true, \"message\":\"Failed to Create User.\"}";
+		return "{\"message\":\"User Successfully Created.\"}";
 	}
 	
 	public User updateUser(long userId, User newUser) throws UserNotFoundException {
+		//errors if newUser.email == oldUser.email
+		if(repo.existsByEmail(newUser.getEmail())) {
+			throw new DuplicateEmailException(newUser.getEmail());
+		} else if (repo.existsByUsername(newUser.getUsername())) {
+			throw new DuplicateUsernameException(newUser.getUsername());
+		}
+		
 		User oldUser = getUser(userId);
 		if(newUser.getEmail() != null) oldUser.setEmail(newUser.getEmail());
 		if(newUser.getPassword() != null) oldUser.setPassword(newUser.getPassword());

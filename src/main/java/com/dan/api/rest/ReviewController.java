@@ -13,6 +13,7 @@ import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.domain.Review;
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.dto.ReviewDTO;
+import com.dan.api.persistance.dto.ReviewShortDTO;
 import com.dan.api.service.ReviewService;
 
 @RestController
@@ -25,12 +26,11 @@ public class ReviewController {
 		this.service = service;
 	}
 	
-	//TODO: return only movieId & userId for optimization?
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<ReviewDTO> getAll(){
+	public List<ReviewShortDTO> getAll(){
 		return service.getAll()
 					.stream()
-					.map(review -> new ReviewDTO(review))
+					.map(review -> new ReviewShortDTO(review))
 					.collect(Collectors.toList());
 	}
 	
