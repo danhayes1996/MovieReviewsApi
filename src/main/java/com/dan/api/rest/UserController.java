@@ -3,12 +3,16 @@ package com.dan.api.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dan.api.exception.UserNotFoundException;
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.dto.ReviewMovieDTO;
 import com.dan.api.persistance.dto.UserReviewsDTO;
@@ -33,8 +37,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public UserReviewsDTO getUser(@PathVariable("id") long userId){
-		return new UserReviewsDTO(service.getUser(userId));
+	public ResponseEntity<?> getUser(@PathVariable("id") long userId){
+		try {
+			User user = service.getUser(userId);
+			return ResponseEntity.ok(new UserReviewsDTO(user));
+		} catch (UserNotFoundException unfe) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(unfe.getMessage());
+		}
 	}
 	
 	@RequestMapping(value = "/getReviews/{id}", method = RequestMethod.GET)
