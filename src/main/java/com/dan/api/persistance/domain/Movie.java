@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Movie {
@@ -19,12 +20,15 @@ public class Movie {
 	
 	private String name;
 	
+	@NotNull
 	@Column(columnDefinition = "BLOB")
 	private String description;
 	
-	@Column(name = "age_rating")
+	@NotNull
+	@Column(name = "age_rating", columnDefinition = "VARCHAR(3)")
 	private String ageRating;
 	
+	@NotNull
 	@Column(name = "img_url")
 	private String imgUrl;
 

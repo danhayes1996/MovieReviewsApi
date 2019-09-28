@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Review {
@@ -14,16 +15,22 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotNull
+	@Column(columnDefinition = "VARCHAR(64)")
 	private String title;
 	
+	@NotNull
 	@Column(columnDefinition = "BLOB")
 	private String content;
 	
+	@Column(columnDefinition = "BIGINT(20) DEFAULT 0")
 	private long likes;
 	
+	@NotNull
 	@ManyToOne
 	private Movie movie;
 	
+	@NotNull
 	@ManyToOne
 	private User user;
 
