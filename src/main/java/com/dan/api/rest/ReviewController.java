@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.domain.Review;
 import com.dan.api.persistance.domain.User;
-import com.dan.api.persistance.dto.UserReviewDTO;
+import com.dan.api.persistance.dto.ReviewDTO;
 import com.dan.api.service.ReviewService;
 
 @RestController
@@ -25,37 +26,37 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<UserReviewDTO> getAll(){
+	public List<ReviewDTO> getAll(){
 		return service.getAll()
 					.stream()
-					.map(review -> new UserReviewDTO(review))
+					.map(review -> new ReviewDTO(review))
 					.collect(Collectors.toList());
 	}
 	
-//	public List<ReviewDTO> getAllByUserId(long userId){
+//	public List<ReviewMovieDTO> getAllByUserId(long userId){
 //		return service.getAllByUserId(userId)
 //				.stream()
 //				.map(review -> new ReviewDTO(review))
 //				.collect(Collectors.toList());
 //	}
-	
+
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public UserReviewDTO getReview(@PathVariable("id") long reviewId){
-		return new UserReviewDTO(service.getReview(reviewId));
+	public ReviewDTO getReview(@PathVariable("id") long reviewId){
+		return new ReviewDTO(service.getReview(reviewId));
 	}
 	
-	@RequestMapping(value = "/create/{userId}", method = RequestMethod.POST)
-	public String createReview(@RequestBody Review review, @PathVariable("userId") User user){
-		return service.createReview(review, user);
+	@RequestMapping(value = "/create/{movieId}/{userId}", method = RequestMethod.POST)
+	public String createReview(@RequestBody Review review, @PathVariable("movieId") Movie movie, @PathVariable("userId") User user){
+		return service.createReview(review, movie, user);
 	}
-	
+
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public UserReviewDTO updateReview(@PathVariable("id") long reviewId, @RequestBody Review review){
-		return new UserReviewDTO(service.updateReview(reviewId, review));
+	public ReviewDTO updateReview(@PathVariable("id") long reviewId, @RequestBody Review review){
+		return new ReviewDTO(service.updateReview(reviewId, review));
 	}
-	
+
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public UserReviewDTO deleteReview(@PathVariable("id") long reviewId){
-		return new UserReviewDTO(service.deleteReview(reviewId));
+	public ReviewDTO deleteReview(@PathVariable("id") long reviewId){
+		return new ReviewDTO(service.deleteReview(reviewId));
 	}
 }

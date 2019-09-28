@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.api.persistance.domain.Movie;
-import com.dan.api.persistance.dto.MovieDTO;
+import com.dan.api.persistance.dto.MovieReviewsDTO;
 import com.dan.api.service.MovieService;
 
 @RestController
 @RequestMapping("movie")
-//CANT USE MovieReviewsDTO because infinite loop
 public class MovieController {
 	
 	private MovieService service;
@@ -25,16 +24,16 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<MovieDTO> getAll() {
+	public List<MovieReviewsDTO> getAll() { 
 		return service.getAll()
 					.stream()
-					.map(movie -> new MovieDTO(movie))
+					.map(movie -> new MovieReviewsDTO(movie))
 					.collect(Collectors.toList());
 	}
 	
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public MovieDTO getMovie(@PathVariable("id") long movieId) {
-		return new MovieDTO(service.getMovie(movieId));
+	public MovieReviewsDTO getMovie(@PathVariable("id") long movieId) {
+		return new MovieReviewsDTO(service.getMovie(movieId));
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -43,12 +42,12 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public MovieDTO updateMovie(@PathVariable("id") long movieId, @RequestBody Movie movie){
-		return new MovieDTO(service.updateMovie(movieId, movie));
+	public MovieReviewsDTO updateMovie(@PathVariable("id") long movieId, @RequestBody Movie movie){
+		return new MovieReviewsDTO(service.updateMovie(movieId, movie));
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public MovieDTO deleteMovie(@PathVariable("id") long movieId){
-		return new MovieDTO(service.deleteMovie(movieId));
+	public MovieReviewsDTO deleteMovie(@PathVariable("id") long movieId){
+		return new MovieReviewsDTO(service.deleteMovie(movieId));
 	}
 }

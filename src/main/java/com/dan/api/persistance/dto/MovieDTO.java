@@ -4,26 +4,26 @@ import com.dan.api.persistance.domain.Movie;
 
 public class MovieDTO {
 
-	private long movieId;
+	private long id;
 	private String name;
 	private String description;
 	private String ageRating;
 	private String imgUrl;
 	
 	public MovieDTO(Movie movie) {
-		this.movieId = movie.getId();
+		this.id = movie.getId();
 		this.name = movie.getName();
 		this.description = movie.getDescription();
 		this.ageRating = movie.getAgeRating();
 		this.imgUrl = movie.getImgUrl();
 	}
 
-	public long getMovieId() {
-		return movieId;
+	public long getId() {
+		return id;
 	}
 
-	public void setMovieId(long movieId) {
-		this.movieId = movieId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

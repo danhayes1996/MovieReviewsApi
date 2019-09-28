@@ -2,21 +2,18 @@ package com.dan.api.persistance.dto;
 
 import com.dan.api.persistance.domain.Review;
 
-public class ReviewDTO {
-
+public class ReviewUserDTO {
 	private long id;
 	private String title;
 	private String content;
 	private long likes;
-	private MovieDTO movie;
 	private UserDTO user;
 	
-	public ReviewDTO(Review review) {
+	public ReviewUserDTO(Review review) {
 		this.id = review.getId();
 		this.title = review.getTitle();
 		this.content = review.getContent();
 		this.likes = review.getLikes();
-		this.movie = new MovieDTO(review.getMovie());
 		this.user = new UserDTO(review.getUser());
 	}
 
@@ -50,14 +47,6 @@ public class ReviewDTO {
 
 	public void setLikes(long likes) {
 		this.likes = likes;
-	}
-
-	public MovieDTO getMovie() {
-		return movie;
-	}
-
-	public void setMovie(MovieDTO movie) {
-		this.movie = movie;
 	}
 
 	public UserDTO getUser() {

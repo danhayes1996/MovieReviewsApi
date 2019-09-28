@@ -6,32 +6,31 @@ import java.util.stream.Collectors;
 import com.dan.api.persistance.domain.Movie;
 
 public class MovieReviewsDTO {
-
-	private long movieId;
+	private long id;
 	private String name;
 	private String description;
 	private String ageRating;
 	private String imgUrl;
-	private List<UserReviewDTO> reviews;
+	private List<ReviewUserDTO> reviews;
 	
 	public MovieReviewsDTO(Movie movie) {
-		this.movieId = movie.getId();
+		this.id = movie.getId();
 		this.name = movie.getName();
 		this.description = movie.getDescription();
 		this.ageRating = movie.getAgeRating();
 		this.imgUrl = movie.getImgUrl();
 		this.reviews = movie.getReviews()
 							.stream()
-							.map(review -> new UserReviewDTO(review))
+							.map(review -> new ReviewUserDTO(review))
 							.collect(Collectors.toList());
 	}
 
-	public long getMovieId() {
-		return movieId;
+	public long getId() {
+		return id;
 	}
 
-	public void setMovieId(long movieId) {
-		this.movieId = movieId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -66,11 +65,11 @@ public class MovieReviewsDTO {
 		this.imgUrl = imgUrl;
 	}
 
-	public List<UserReviewDTO> getReviews() {
+	public List<ReviewUserDTO> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<UserReviewDTO> reviews) {
+	public void setReviews(List<ReviewUserDTO> reviews) {
 		this.reviews = reviews;
 	}
 }

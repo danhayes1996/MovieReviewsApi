@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.dan.api.exception.ReviewNotFoundException;
+import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.domain.Review;
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.repository.ReviewRepository;
@@ -31,8 +32,9 @@ public class ReviewService {
 		throw new ReviewNotFoundException(ReviewId);
 	}
 	
-	public String createReview(Review review, User user) {
+	public String createReview(Review review, Movie movie, User user) {
 		review.setUser(user);
+		review.setMovie(movie);
 		Review result = repo.save(review);
 		if(result != null) {
 			return "{\"message\":\"Review Successfully Created.\"}";
