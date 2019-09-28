@@ -6,4 +6,8 @@ public class ReviewNotFoundException extends RuntimeException {
 	public ReviewNotFoundException(long id) {
 		super("Review " + id + " not found");
 	}
+	
+	public ReviewNotFoundException() {
+		super("Review not found");
+	}
 }

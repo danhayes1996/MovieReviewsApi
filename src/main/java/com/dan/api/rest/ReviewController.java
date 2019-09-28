@@ -25,6 +25,7 @@ public class ReviewController {
 		this.service = service;
 	}
 	
+	//TODO: return only movieId & userId for optimization?
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<ReviewDTO> getAll(){
 		return service.getAll()
@@ -33,13 +34,6 @@ public class ReviewController {
 					.collect(Collectors.toList());
 	}
 	
-//	public List<ReviewMovieDTO> getAllByUserId(long userId){
-//		return service.getAllByUserId(userId)
-//				.stream()
-//				.map(review -> new ReviewDTO(review))
-//				.collect(Collectors.toList());
-//	}
-
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public ReviewDTO getReview(@PathVariable("id") long reviewId){
 		return new ReviewDTO(service.getReview(reviewId));

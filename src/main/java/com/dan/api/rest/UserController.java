@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.api.persistance.domain.User;
+import com.dan.api.persistance.dto.ReviewMovieDTO;
 import com.dan.api.persistance.dto.UserReviewsDTO;
 import com.dan.api.service.UserService;
 
@@ -34,6 +35,14 @@ public class UserController {
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public UserReviewsDTO getUser(@PathVariable("id") long userId){
 		return new UserReviewsDTO(service.getUser(userId));
+	}
+	
+	@RequestMapping(value = "/getReviews/{id}", method = RequestMethod.GET)
+	public List<ReviewMovieDTO> getUserReviews(@PathVariable("id") long userId){
+		return service.getUser(userId).getReviews()
+						.stream()
+						.map(review -> new ReviewMovieDTO(review))
+						.collect(Collectors.toList());
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

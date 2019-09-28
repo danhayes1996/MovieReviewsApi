@@ -6,4 +6,8 @@ public class MovieNotFoundException extends RuntimeException {
 	public MovieNotFoundException(long id) {
 		super("Movie " + id + " not found");
 	}
+	
+	public MovieNotFoundException() {
+		super("Movie not found");
+	}
 }
