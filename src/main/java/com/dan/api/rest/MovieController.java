@@ -3,6 +3,7 @@ package com.dan.api.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.dto.MovieReviewsDTO;
 import com.dan.api.service.MovieService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("movie")
 public class MovieController {

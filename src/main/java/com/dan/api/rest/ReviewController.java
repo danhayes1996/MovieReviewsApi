@@ -3,6 +3,7 @@ package com.dan.api.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.dan.api.persistance.dto.ReviewDTO;
 import com.dan.api.persistance.dto.ReviewShortDTO;
 import com.dan.api.service.ReviewService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("review")
 public class ReviewController {
