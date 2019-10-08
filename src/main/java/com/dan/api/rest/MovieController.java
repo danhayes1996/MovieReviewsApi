@@ -38,6 +38,14 @@ public class MovieController {
 		return new MovieReviewsDTO(service.getMovieById(movieId));
 	}
 	
+	@RequestMapping(value = "/new/{count}", method = RequestMethod.GET)
+	public List<MovieReviewsDTO> getNewMovies(@PathVariable("count")int count) {
+		return service.getNewMovies(count)
+					.stream()
+					.map(movie -> new MovieReviewsDTO(movie))
+					.collect(Collectors.toList());
+	}
+	
 	@RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
 	public List<MovieReviewsDTO> getMovies(@PathVariable("name") String name) { 
 		return service.getMovies(name)

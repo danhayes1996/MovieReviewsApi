@@ -3,6 +3,7 @@ package com.dan.api.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.dan.api.exception.MovieNotFoundException;
@@ -32,6 +33,10 @@ public class MovieService {
 	
 	public List<Movie> getMovies(String name) {
 		return repo.findByNameContaining(name);
+	}
+	
+	public List<Movie> getNewMovies(int count) {
+		return repo.findNewMovies(PageRequest.of(0, count));
 	}
 	
 	public String createMovie(Movie movie) {
