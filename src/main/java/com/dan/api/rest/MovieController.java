@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.dto.MovieReviewsDTO;
+import com.dan.api.persistance.dto.MovieShortDTO;
 import com.dan.api.service.MovieService;
 
 @CrossOrigin
@@ -39,18 +40,18 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/new/{count}", method = RequestMethod.GET)
-	public List<MovieReviewsDTO> getNewMovies(@PathVariable("count")int count) {
+	public List<MovieShortDTO> getNewMovies(@PathVariable("count")int count) {
 		return service.getNewMovies(count)
 					.stream()
-					.map(movie -> new MovieReviewsDTO(movie))
+					.map(movie -> new MovieShortDTO(movie))
 					.collect(Collectors.toList());
 	}
 	
 	@RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
-	public List<MovieReviewsDTO> getMovies(@PathVariable("name") String name) { 
+	public List<MovieShortDTO> getMovies(@PathVariable("name") String name) { 
 		return service.getMovies(name)
 					.stream()
-					.map(movie -> new MovieReviewsDTO(movie))
+					.map(movie -> new MovieShortDTO(movie))
 					.collect(Collectors.toList());
 	}
 	

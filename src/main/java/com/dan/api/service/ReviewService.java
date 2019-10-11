@@ -37,8 +37,11 @@ public class ReviewService {
 	public String createReview(Review review, Movie movie, User user) throws MovieNotFoundException, UserNotFoundException{
 		if(movie == null) throw new MovieNotFoundException();
 		if(user == null) throw new UserNotFoundException();
+		
 		review.setUser(user);
 		review.setMovie(movie);
+		movie.addRating(review.getRating());
+		
 		repo.save(review);
 		return "{\"message\":\"Review Successfully Created.\"}";
 	}
@@ -57,6 +60,9 @@ public class ReviewService {
 	
 	public Review deleteReview(long reviewId) throws ReviewNotFoundException {
 		Review review = getReview(reviewId);
+		Movie m = review.getMovie();
+		m.removeRating(review.getRating());
+		
 		repo.delete(review);
 		return review;
 	}

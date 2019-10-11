@@ -27,6 +27,10 @@ public class Review {
 	private long likes;
 	
 	@NotNull
+	@Column(columnDefinition = "INT(2)")
+	private int rating;
+	
+	@NotNull
 	@ManyToOne
 	private Movie movie;
 	
@@ -64,6 +68,14 @@ public class Review {
 
 	public void setLikes(long likes) {
 		this.likes = likes;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public Movie getMovie() {

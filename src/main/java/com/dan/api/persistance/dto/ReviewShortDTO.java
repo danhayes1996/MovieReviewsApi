@@ -7,6 +7,7 @@ public class ReviewShortDTO {
 	private String title;
 	private String content;
 	private long likes;
+	private int rating;
 	private long movieId;
 	private long userId;
 	
@@ -15,6 +16,7 @@ public class ReviewShortDTO {
 		this.title = review.getTitle();
 		this.content = review.getContent();
 		this.likes = review.getLikes();
+		this.rating = review.getRating();
 		this.movieId = review.getMovie().getId();
 		this.userId = review.getUser().getId();
 	}
@@ -49,6 +51,14 @@ public class ReviewShortDTO {
 
 	public void setLikes(long likes) {
 		this.likes = likes;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public long getMovieId() {

@@ -11,6 +11,9 @@ public class MovieReviewsDTO {
 	private String description;
 	private String ageRating;
 	private String imgUrl;
+	private int runtime;
+	private float rating;
+	private int ratingsCount;
 	private List<ReviewUserDTO> reviews;
 	
 	public MovieReviewsDTO(Movie movie) {
@@ -19,6 +22,9 @@ public class MovieReviewsDTO {
 		this.description = movie.getDescription();
 		this.ageRating = movie.getAgeRating();
 		this.imgUrl = movie.getImgUrl();
+		this.runtime = movie.getRuntime();
+		this.rating = movie.getRating();
+		this.ratingsCount = movie.getRatingsCount();
 		this.reviews = movie.getReviews()
 							.stream()
 							.map(review -> new ReviewUserDTO(review))
@@ -65,6 +71,30 @@ public class MovieReviewsDTO {
 		this.imgUrl = imgUrl;
 	}
 
+	public int getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public int getRatingsCount() {
+		return ratingsCount;
+	}
+
+	public void setRatingsCount(int ratingsCount) {
+		this.ratingsCount = ratingsCount;
+	}
+	
 	public List<ReviewUserDTO> getReviews() {
 		return reviews;
 	}
@@ -72,4 +102,5 @@ public class MovieReviewsDTO {
 	public void setReviews(List<ReviewUserDTO> reviews) {
 		this.reviews = reviews;
 	}
+	
 }

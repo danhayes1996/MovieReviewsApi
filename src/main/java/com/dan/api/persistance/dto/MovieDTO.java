@@ -9,6 +9,9 @@ public class MovieDTO {
 	private String description;
 	private String ageRating;
 	private String imgUrl;
+	private int runtime;
+	private float rating;
+	private int ratingsCount;
 	
 	public MovieDTO(Movie movie) {
 		this.id = movie.getId();
@@ -16,6 +19,9 @@ public class MovieDTO {
 		this.description = movie.getDescription();
 		this.ageRating = movie.getAgeRating();
 		this.imgUrl = movie.getImgUrl();
+		this.runtime = movie.getRuntime();
+		this.rating = movie.getRating();
+		this.ratingsCount = movie.getRatingsCount();
 	}
 
 	public long getId() {
@@ -56,5 +62,29 @@ public class MovieDTO {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public int getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	
+	public int getRatingsCount() {
+		return ratingsCount;
+	}
+
+	public void setRatingsCount(int ratingsCount) {
+		this.ratingsCount = ratingsCount;
 	}
 }

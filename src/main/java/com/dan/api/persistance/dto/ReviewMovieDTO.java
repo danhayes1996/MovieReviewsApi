@@ -8,6 +8,7 @@ public class ReviewMovieDTO {
 	private String title;
 	private String content;
 	private long likes;
+	private int rating;
 	private MovieDTO movie;
 	
 	public ReviewMovieDTO(Review review) {
@@ -15,6 +16,7 @@ public class ReviewMovieDTO {
 		this.title = review.getTitle();
 		this.content = review.getContent();
 		this.likes = review.getLikes();
+		this.rating = review.getRating();
 		this.movie = new MovieDTO(review.getMovie());
 	}
 
@@ -48,6 +50,14 @@ public class ReviewMovieDTO {
 
 	public void setLikes(long likes) {
 		this.likes = likes;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public MovieDTO getMovie() {
