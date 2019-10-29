@@ -7,7 +7,7 @@ public class UserDTO {
 	private long id;
 	private String email;
 	private String username;
-	private String password;
+//	private String password;
 	private String firstName;
 	private String lastName;
 	
@@ -15,7 +15,7 @@ public class UserDTO {
 		this.id = user.getId();
 		this.email = user.getEmail();
 		this.username = user.getUsername();
-		this.password = user.getPassword();
+//		this.password = user.getPassword();
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 	}
@@ -44,13 +44,13 @@ public class UserDTO {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 
 	public String getFirstName() {
 		return firstName;

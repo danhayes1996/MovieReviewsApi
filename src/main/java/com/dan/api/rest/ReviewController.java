@@ -3,6 +3,7 @@ package com.dan.api.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +23,8 @@ import com.dan.api.service.ReviewService;
 @RequestMapping("review")
 public class ReviewController {
 	
+	@Autowired
 	private ReviewService service;
-	
-	public ReviewController(ReviewService service) {
-		this.service = service;
-	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<ReviewShortDTO> getAll(){
