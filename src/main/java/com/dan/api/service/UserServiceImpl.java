@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dan.api.exception.DuplicateEmailException;
 import com.dan.api.exception.DuplicateUsernameException;
@@ -21,10 +22,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository repo;
 
+	@Override
 	public List<User> getAll(){
 		return repo.findAll();
 	}
 
+	@Override
 	public User getUser(long userId) throws UserNotFoundException {
 		Optional<User> result = repo.findById(userId);
 		if(result.isPresent()) {
@@ -33,6 +36,15 @@ public class UserServiceImpl implements UserService {
 		throw new UserNotFoundException(userId);
 	}
 	
+	@Override
+	public User authenticateUser(long userId, User userDetails) throws UserNotFoundException {
+		//TODO: check (user.email || user.username) && user.password is correct
+		Optional<User> result = repo.findById(userId);
+		return null;
+	}
+
+	@Override
+	@Transactional
 	public String createUser(User user) {
 		try {
 			repo.save(user);
@@ -45,7 +57,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return "{\"message\":\"User Successfully Created.\"}";
 	}
-	
+
+	@Override
+	@Transactional
 	public User updateUser(long userId, User newUser) throws UserNotFoundException {
 		//errors if newUser.email == oldUser.email
 		if(repo.existsByEmail(newUser.getEmail())) {
@@ -62,11 +76,12 @@ public class UserServiceImpl implements UserService {
 		repo.save(oldUser);
 		return oldUser;
 	}
-	
+
+	@Override
+	@Transactional
 	public User deleteUser(long userId) throws UserNotFoundException {
 		User user = getUser(userId);
 		repo.delete(user);
 		return user;
 	}
-	
 }

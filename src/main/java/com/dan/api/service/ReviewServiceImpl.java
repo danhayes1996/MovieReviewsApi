@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dan.api.exception.MovieNotFoundException;
 import com.dan.api.exception.ReviewNotFoundException;
@@ -22,10 +23,12 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	private ReviewRepository repo;
 	
+	@Override
 	public List<Review> getAll(){
 		return repo.findAll();
 	}
 
+	@Override
 	public Review getReview(long reviewId) throws ReviewNotFoundException {
 		Optional<Review> result = repo.findById(reviewId);
 		if(result.isPresent()) {
@@ -33,7 +36,9 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		throw new ReviewNotFoundException(reviewId);
 	}
-	
+
+	@Override
+	@Transactional
 	public String createReview(Review review, Movie movie, User user) throws MovieNotFoundException, UserNotFoundException {
 		if(movie == null) throw new MovieNotFoundException();
 		if(user == null) throw new UserNotFoundException();
@@ -45,7 +50,9 @@ public class ReviewServiceImpl implements ReviewService {
 		repo.save(review);
 		return "{\"message\":\"Review Successfully Created.\"}";
 	}
-	
+
+	@Override
+	@Transactional
 	public Review updateReview(long reviewId, Review newReview) throws ReviewNotFoundException {
 		Review oldReview = getReview(reviewId);
 
@@ -57,7 +64,9 @@ public class ReviewServiceImpl implements ReviewService {
 		repo.save(oldReview);
 		return oldReview;
 	}
-	
+
+	@Override
+	@Transactional
 	public Review deleteReview(long reviewId) throws ReviewNotFoundException {
 		Review review = getReview(reviewId);
 		Movie m = review.getMovie();

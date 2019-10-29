@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dan.api.exception.MovieNotFoundException;
 import com.dan.api.persistance.domain.Movie;
@@ -44,6 +45,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
+	@Transactional
 	public String createMovie(Movie movie) {
 		Movie result = repo.save(movie);
 		if(result != null) {
@@ -53,6 +55,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
+	@Transactional
 	public Movie updateMovie(long movieId, Movie newMovie) throws MovieNotFoundException {
 		Movie oldMovie = getMovieById(movieId);
 		
@@ -66,6 +69,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
+	@Transactional
 	public Movie deleteMovie(long movieId) throws MovieNotFoundException {
 		Movie movie = getMovieById(movieId);
 		repo.delete(movie);

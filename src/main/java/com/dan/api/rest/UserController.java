@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.dto.ReviewMovieDTO;
+import com.dan.api.persistance.dto.UserDTO;
 import com.dan.api.persistance.dto.UserReviewsDTO;
 import com.dan.api.service.UserService;
 
@@ -35,6 +36,11 @@ public class UserController {
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public UserReviewsDTO getUser(@PathVariable("id") long userId){
 		return new UserReviewsDTO(service.getUser(userId));
+	}
+	
+	@RequestMapping(value = "/auth/{id}", method = RequestMethod.POST)
+	public UserDTO authenticateUser(@PathVariable("id") long userId, @RequestBody User userDetails) {
+		return new UserDTO(service.authenticateUser(userId, userDetails));
 	}
 	
 	@RequestMapping(value = "/getReviews/{id}", method = RequestMethod.GET)
