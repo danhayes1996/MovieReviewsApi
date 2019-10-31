@@ -38,9 +38,9 @@ public class UserController {
 		return new UserReviewsDTO(service.getUser(userId));
 	}
 	
-	@RequestMapping(value = "/auth/{id}", method = RequestMethod.POST)
-	public UserDTO authenticateUser(@PathVariable("id") long userId, @RequestBody User userDetails) {
-		return new UserDTO(service.authenticateUser(userId, userDetails));
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public UserDTO authenticateUser(@RequestBody User user) {
+		return new UserDTO(service.authenticateUser(user));
 	}
 	
 	@RequestMapping(value = "/getReviews/{id}", method = RequestMethod.GET)

@@ -1,7 +1,6 @@
 package com.dan.api.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dan.api.exception.DuplicateEmailException;
 import com.dan.api.exception.DuplicateUsernameException;
+import com.dan.api.exception.InvalidAccountDetailsException;
 import com.dan.api.exception.UserNotFoundException;
 import com.dan.api.persistance.domain.User;
 import com.dan.api.persistance.repository.UserRepository;
@@ -29,18 +29,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(long userId) throws UserNotFoundException {
-		Optional<User> result = repo.findById(userId);
-		if(result.isPresent()) {
-			return result.get();
-		}
-		throw new UserNotFoundException(userId);
+		return repo.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
 	}
 	
 	@Override
-	public User authenticateUser(long userId, User userDetails) throws UserNotFoundException {
-		//TODO: check (user.email || user.username) && user.password is correct
-		Optional<User> result = repo.findById(userId);
-		return null;
+	public User authenticateUser(User user) throws InvalidAccountDetailsException {
+		User foundUser = repo.authenticateUser(user.getUsername(), user.getEmail(), user.getPassword());
+		if(foundUser != null) return foundUser;
+		else throw new InvalidAccountDetailsException();
 	}
 
 	@Override
