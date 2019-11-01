@@ -38,8 +38,16 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/new/{count}", method = RequestMethod.GET)
-	public List<MovieShortDTO> getNewMovies(@PathVariable("count")int count) {
+	public List<MovieShortDTO> getNewMovies(@PathVariable("count") int count) {
 		return service.getNewMovies(count)
+					.stream()
+					.map(movie -> new MovieShortDTO(movie))
+					.collect(Collectors.toList());
+	}
+	
+	@RequestMapping(value = "/best/{count}", method = RequestMethod.GET)
+	public List<MovieShortDTO> getHighestRatedMovies(@PathVariable("count") int count) {
+		return service.getHighestRatedMovies(count)
 					.stream()
 					.map(movie -> new MovieShortDTO(movie))
 					.collect(Collectors.toList());

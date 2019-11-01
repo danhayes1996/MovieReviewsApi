@@ -16,4 +16,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
 	
 	@Query("SELECT m FROM Movie m ORDER BY m.id DESC")
 	public List<Movie> findNewMovies(PageRequest pr);
+	
+	@Query("SELECT m FROM Movie m ORDER BY m.rating DESC")
+	public List<Movie> findHighestRated(PageRequest pr);
 }

@@ -11,6 +11,7 @@ public interface MovieService {
 	public Movie getMovieById(long MovieId) throws MovieNotFoundException;
 	public List<Movie> getMovies(String name);
 	public List<Movie> getNewMovies(int count);
+	public List<Movie> getHighestRatedMovies(int count);
 	public String createMovie(Movie movie);
 	public Movie updateMovie(long movieId, Movie newMovie) throws MovieNotFoundException;
 	public Movie deleteMovie(long movieId) throws MovieNotFoundException;

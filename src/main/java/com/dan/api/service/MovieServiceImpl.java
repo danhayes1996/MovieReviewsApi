@@ -43,6 +43,11 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> getNewMovies(int count) {
 		return repo.findNewMovies(PageRequest.of(0, count));
 	}
+	
+	@Override
+	public List<Movie> getHighestRatedMovies(int count) {
+		return repo.findHighestRated(PageRequest.of(0, count));
+	}
 
 	@Override
 	@Transactional
