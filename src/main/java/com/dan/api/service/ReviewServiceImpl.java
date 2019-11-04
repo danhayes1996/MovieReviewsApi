@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dan.api.exception.CreationException;
 import com.dan.api.exception.MovieNotFoundException;
 import com.dan.api.exception.ReviewNotFoundException;
 import com.dan.api.exception.UserNotFoundException;
@@ -39,7 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	@Transactional
-	public String createReview(Review review, Movie movie, User user) throws MovieNotFoundException, UserNotFoundException {
+	public Review createReview(Review review, Movie movie, User user) throws CreationException, MovieNotFoundException, UserNotFoundException {
 		if(movie == null) throw new MovieNotFoundException();
 		if(user == null) throw new UserNotFoundException();
 		
@@ -47,8 +48,9 @@ public class ReviewServiceImpl implements ReviewService {
 		review.setMovie(movie);
 		movie.addRating(review.getRating());
 		
-		repo.save(review);
-		return "{\"message\":\"Review Successfully Created.\"}";
+		Review result = repo.save(review);
+		if(result == null) throw new CreationException("review");
+		else return result;
 	}
 
 	@Override

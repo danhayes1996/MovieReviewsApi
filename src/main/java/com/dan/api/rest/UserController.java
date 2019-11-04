@@ -52,8 +52,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createUser(@RequestBody User user){
-		return service.createUser(user);
+	public UserDTO createUser(@RequestBody User user){
+		return new UserDTO(service.createUser(user));
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.api.persistance.domain.Movie;
+import com.dan.api.persistance.dto.MovieDTO;
 import com.dan.api.persistance.dto.MovieReviewsDTO;
 import com.dan.api.persistance.dto.MovieShortDTO;
 import com.dan.api.service.MovieService;
@@ -62,8 +63,8 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createMovie(@RequestBody Movie movie){
-		return service.createMovie(movie);
+	public MovieDTO createMovie(@RequestBody Movie movie){
+		return new MovieDTO(service.createMovie(movie));
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)

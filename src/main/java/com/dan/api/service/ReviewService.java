@@ -2,6 +2,7 @@ package com.dan.api.service;
 
 import java.util.List;
 
+import com.dan.api.exception.CreationException;
 import com.dan.api.exception.MovieNotFoundException;
 import com.dan.api.exception.ReviewNotFoundException;
 import com.dan.api.exception.UserNotFoundException;
@@ -13,7 +14,7 @@ public interface ReviewService {
 	
 	public List<Review> getAll();
 	public Review getReview(long reviewId) throws ReviewNotFoundException;
-	public String createReview(Review review, Movie movie, User user) throws MovieNotFoundException, UserNotFoundException;
+	public Review createReview(Review review, Movie movie, User user) throws CreationException, MovieNotFoundException, UserNotFoundException;
 	public Review updateReview(long reviewId, Review newReview) throws ReviewNotFoundException;
 	public Review deleteReview(long reviewId) throws ReviewNotFoundException;
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.dan.api.exception.CreationException;
 import com.dan.api.exception.DuplicateEmailException;
 import com.dan.api.exception.DuplicateUsernameException;
 import com.dan.api.exception.InvalidAccountDetailsException;
@@ -31,6 +32,11 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler({DuplicateUsernameException.class, DuplicateEmailException.class})
 	public void duplicateException(HttpServletResponse response) throws IOException {
+		response.sendError(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	@ExceptionHandler({CreationException.class})
+	public void creationException(HttpServletResponse response) throws IOException {
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 }

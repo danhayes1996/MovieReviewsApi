@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dan.api.exception.CreationException;
 import com.dan.api.exception.MovieNotFoundException;
 import com.dan.api.persistance.domain.Movie;
 import com.dan.api.persistance.repository.MovieRepository;
@@ -51,12 +52,10 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	@Transactional
-	public String createMovie(Movie movie) {
+	public Movie createMovie(Movie movie) {
 		Movie result = repo.save(movie);
-		if(result != null) {
-			return "{\"message\":\"Movie Successfully Created.\"}";
-		}
-		return "{\"error\":true, \"message\":\"Failed to Create Movie.\"}";
+		if(result == null) throw new CreationException("movie");
+		else return result;
 	}
 
 	@Override

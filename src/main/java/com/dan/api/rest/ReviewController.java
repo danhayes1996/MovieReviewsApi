@@ -40,8 +40,8 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/create/{movieId}/{userId}", method = RequestMethod.POST)
-	public String createReview(@RequestBody Review review, @PathVariable("movieId") Movie movie, @PathVariable("userId") User user){
-		return service.createReview(review, movie, user);
+	public ReviewDTO createReview(@RequestBody Review review, @PathVariable("movieId") Movie movie, @PathVariable("userId") User user){
+		return new ReviewDTO(service.createReview(review, movie, user));
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)

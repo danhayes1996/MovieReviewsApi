@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dan.api.exception.CreationException;
 import com.dan.api.exception.DuplicateEmailException;
 import com.dan.api.exception.DuplicateUsernameException;
 import com.dan.api.exception.InvalidAccountDetailsException;
@@ -41,9 +42,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public String createUser(User user) {
+	public User createUser(User user) {
+		User result = null;
 		try {
-			repo.save(user);
+			result = repo.save(user);
 		} catch (DataIntegrityViolationException dive) {
 			if(repo.existsByEmail(user.getEmail())) {
 				throw new DuplicateEmailException(user.getEmail());
@@ -51,7 +53,9 @@ public class UserServiceImpl implements UserService {
 				throw new DuplicateUsernameException(user.getUsername());
 			}
 		}
-		return "{\"message\":\"User Successfully Created.\"}";
+		
+		if(result == null) throw new CreationException("user");
+		return result;
 	}
 
 	@Override
